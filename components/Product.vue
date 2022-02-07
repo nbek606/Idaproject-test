@@ -15,4 +15,11 @@ export default {
   .product {
     display: flex;
   }
+
+  //Адаптация под мобилку
+  @media (max-width: 820px) {
+    .product {
+      flex-direction: column;
+    }
+  }
 </style>

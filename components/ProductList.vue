@@ -1,5 +1,13 @@
 <template>
   <div class="product_list">
+    <!--фильтр-->
+    <div class="product_list-filter">
+      <Select
+        v-model="sortSelected"
+        :options="filter"
+      />
+    </div> 
+    <!--список-->
     <div class="product_list-item">  
       <ProductListItem 
         v-for="item in list"
@@ -11,16 +19,41 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+/* import utils */
+import { sortProductList } from '@/utils/index.js'
 
 export default {
   name: 'ProductList',
+  data () {
+    return {
+      sortSelected: null,
+      filter: [
+        {
+          text: 'По умолчанию',
+          value: ''
+        },
+        {
+          text: 'По цене min',
+          value: 'min'
+        },
+        {
+          text: 'По цене max',
+          value: 'max'
+        },
+        {
+          text: 'По наименованию',
+          value: 'name'
+        }
+      ]
+    }
+  },
   computed: {
     ...mapGetters ({
       getList: 'product/getList'
     }),
 
     list () {
-      return this.getList
+      return sortProductList(this.getList.slice(), this.sortSelected)
     }
   }
 }
@@ -28,9 +61,14 @@ export default {
 <style lang="scss" scoped>
   .product_list {
     width: calc(100% - $productCreateWidth);
+    margin-left: calc($productCreateWidth + 20px);
+    display: flex;
     flex-direction: column;
-    margin: 0;
-    margin-top: 20px;
+    
+    &-filter {
+      margin-left: auto;
+      padding-bottom: 20px;
+    }
 
     &-item {
       width: 100%;

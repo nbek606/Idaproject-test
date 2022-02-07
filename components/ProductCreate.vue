@@ -1,49 +1,47 @@
 <template>
-  <transition name="fade">
-    <div class="product_create">
-      <!--заголовок-->
-      <h2 class="product_create-title">
-        Добавление товара
-      </h2>
+  <div class="product_create">
+    <!--заголовок-->
+    <h2 class="product_create-title">
+      Добавление товара
+    </h2>
 
-      <!--уведомления-->
-      <div 
-        v-if="noticeForm"
-        class="product_create-notice-form"
-      >
-        <div class="icon">
-          <CheckIcon />
-        </div>
-        <div class="title">
-          Товар успешно добавлен!
-        </div>
+    <!--уведомления-->
+    <div 
+      v-if="noticeForm"
+      class="product_create-notice-form"
+    >
+      <div class="icon">
+        <CheckIcon />
       </div>
-
-      <!--форма-->
-      <div 
-        v-if="!noticeForm"
-        class="product_create-form"
-      >
-        <Input
-          v-for="(input, index) in inputs"
-          :key="index"
-          v-model="form[input.key]"
-          :label="input.label"
-          :placeholder="input.placeholder"
-          :view="input.view"
-          :required="input.required"
-        />
-        <!--кнопка добавления-->
-        <button
-          class="product_create-button"
-          :disabled="!validation"
-          @click="create"
-        >
-          Добавить товар
-        </button>
+      <div class="title">
+        Товар успешно добавлен!
       </div>
     </div>
-  </transition>
+
+    <!--форма-->
+    <div 
+      v-if="!noticeForm"
+      class="product_create-form"
+    >
+      <Input
+        v-for="(input, index) in inputs"
+        :key="index"
+        v-model="form[input.key]"
+        :label="input.label"
+        :placeholder="input.placeholder"
+        :view="input.view"
+        :required="input.required"
+      />
+      <!--кнопка добавления-->
+      <button
+        class="product_create-button"
+        :disabled="!validation"
+        @click="create"
+      >
+        Добавить товар
+      </button>
+    </div>
+  </div>
 </template>
 <script>
 

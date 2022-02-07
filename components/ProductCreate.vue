@@ -138,6 +138,7 @@ export default {
 <style lang="scss" scoped>
   .product_create {
     width:$productCreateWidth;
+    position: fixed;
 
     &-title {
       color: color(text-dark);

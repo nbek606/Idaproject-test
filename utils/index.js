@@ -33,9 +33,37 @@ const clearForm = (form) => {
   })
 }
 
+/* сортировка списка продуктов */
+const sortProductList = (list, value) => {
+  if (!value) {
+    return list
+  }
+
+  if (value == 'min') {
+    return list.sort((a, b) => a.price - b.price)
+  }
+
+  if (value == 'max') {
+    return list.sort((a, b) => b.price - a.price)
+  }
+
+  if (value == 'name') {
+    return list.sort((a, b) => { 
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    })
+  }
+}
+
 export {
   moneySpaces,
   formValidation,
   inputValidation,
-  clearForm
+  clearForm,
+  sortProductList
 }

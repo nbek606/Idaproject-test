@@ -142,6 +142,7 @@ export default {
     &-title {
       color: color(text-dark);
       font-weight: 500;
+      margin-top: 0;
     }
 
     &-form, &-notice-form {

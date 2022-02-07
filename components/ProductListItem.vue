@@ -1,5 +1,11 @@
 <template>
   <div class="product">
+     <div 
+        class="product_remove"
+        @click="remove"
+      >
+       <RemoveIcon />
+     </div>
      <div class="product_img">
        <img :src="product.imgUrl" />
      </div>
@@ -62,9 +68,10 @@ export default {
     flex: 1 1 300px;
     transition: 0.4s;
 
-    &_img {      
+    &_img {  
       img {
         width: 100%;
+        height: 100%;
         border-radius:4px 4px 0 0;
        }
     }
@@ -86,5 +93,20 @@ export default {
       font-size: 24px;
       font-weight: 600;
     } 
+    
+    &_remove {
+      background-color: #FF8484;
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: -10px;
+      margin-right: -10px;
+      right: 0;
+    }
   }
 </style>

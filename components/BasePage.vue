@@ -14,4 +14,10 @@ export default {
     box-sizing: border-box;
     padding: 25px;
   }
+
+  @media (max-width: 820px) {
+    .base_page {
+      padding: 25px 0;
+    }
+  }
 </style>

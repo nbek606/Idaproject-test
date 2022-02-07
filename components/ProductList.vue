@@ -67,6 +67,7 @@ export default {
     
     &-filter {
       margin-left: auto;
+      margin-right: 15px;
       padding-bottom: 20px;
     }
 

@@ -143,7 +143,7 @@ export default {
     &-title {
       color: color(text-dark);
       font-weight: 500;
-      margin-top: 0;
+      margin: 14px 0;
     }
 
     &-form, &-notice-form {
@@ -166,11 +166,6 @@ export default {
         margin: auto;
         padding-bottom: 10px;
       }
-
-      .title {
-        font-size: 20px;
-        color: color(text-dark);
-      }
     }
 
     &-button {
@@ -182,7 +177,6 @@ export default {
       background-color: color(green-dark);
       color: color(white);
       cursor: pointer;
-      transition: 0.4s;
 
       &:hover {
         background-color: color(blue);
@@ -196,10 +190,6 @@ export default {
         cursor: default;
       }
     }
-    .fade-enter-active {
-      transition: 1s;
-    }
-
   }
 
   svg {
@@ -209,7 +199,9 @@ export default {
   //Адаптация под мобилку
   @media (max-width: 820px) {
     .product_create {
-      width: 100%;
+      width: calc(100% - 30px);
+      position: relative;
+      margin: 0 15px;
     }
   }
 </style>

@@ -15,6 +15,7 @@
       <input
         v-if="view == 'input'"
         class="input"
+        :class="{ 'no-validate': !validation }"
         :value="inputValue"
         :placeholder="placeholder"
         :type="type"
@@ -25,6 +26,7 @@
       <textarea
         v-if="view == 'text-area'"
         class="text-area"
+        :class="{ 'no-validate': !validation }"
         :value="inputValue"
         :placeholder="placeholder"
         :type="type"
@@ -32,24 +34,39 @@
         @input="handle($event)"
       />
       <!--Денежные средства-->
-      <input
+      <money
         v-if="view == 'money'"
         class="input"
+        :class="{ 'no-validate': !validation }"
         :value="inputValue"
         :placeholder="placeholder"
         :required="required"
         :type="type"
+        v-bind="money"
         @input="handle($event)"
       />
+      <div 
+        v-if="!validation"
+        class="error-message"
+      >
+          Поле является обязательным
+      </div>
     </div>
 </template>
 <script>
 
-/* import helpers */
-import { moneySpaces } from '@/utils/index.js'
+/* import utils */
+import { inputValidation } from '@/utils/index.js'
+
+/* import components */
+import { Money } from 'v-money'
 
 export default {
   name: 'InputText',
+  components: {
+    Money
+  },
+
   props: {
     label: { type: String, default: '' },
     placeholder: { type: String, default: '' },
@@ -58,17 +75,31 @@ export default {
     inputClass: { type: String, default: '' },
     view: { type: String, default: 'input'}
   },
-  
+
   data () {
     return {
       inputValue: '',
+      money: {
+        decimal: ',',
+        thousands: ' ',
+        precision: 0,
+        masked: false
+      }
+    }
+  },
+
+  computed: {
+    validation () {
+      if (!this.required) {
+        return true
+      }
+
+      return inputValidation(this.inputValue)
     }
   },
   methods: {
     handle (event) {
-      const value = event.target.value
-
-      this.inputValue = this.view == 'money' ? moneySpaces(value) : value
+      this.inputValue = this.view == 'money' ? event : event.target.value
 
       this.$emit('input', this.inputValue)
     }
@@ -108,9 +139,18 @@ export default {
       resize: none;
     }
 
+    .no-validate {
+      border: 1px solid color(danger) !important;
+    }
 
     .required {
       color: color(danger);
+    }
+
+    .error-message {
+      color: color(danger);
+      font-size: 11px;
+      padding: 5px 0;
     }
   }
 </style>
